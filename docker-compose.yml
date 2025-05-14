@@ -1,0 +1,34 @@
+services:
+  ibc:
+    build:
+      context: .
+      dockerfile: Dockerfile_ibc
+    container_name: ibc
+    environment:
+      - IB_USERNAME=${IB_USERNAME}
+      - IB_PASSWORD=${IB_PASSWORD}
+      - IB_PORT=${IB_PORT:-4004}
+      - TRADING_MODE=${TRADING_MODE:-paper}
+    # volumes:
+    #   - ./config/config.ini:/home/ibgateway/ibc/config.ini
+    #   - ./config/jts.ini:/home/ibgateway/Jts/jts.ini
+    networks:
+      - ib-network
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile_fastapi
+    container_name: fastapi
+    environment:
+      - IB_CLIENT_ID=${IB_CLIENT_ID:-1}
+      - IB_PORT=${IB_PORT:-4004}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ibc
+    networks:
+      - ib-network
+
+networks:
+  ib-network:
+    driver: bridge
