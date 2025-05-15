@@ -9,8 +9,8 @@ This project provides a REST API to interact with Interactive Brokers (IB) Gatew
 ## Setup Instructions
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/ib-test.git
-   cd ib-test
+   git clone https://github.com/Vayks123/ib_test.git
+   cd ib_test
    ```
 
 2. **Configure environment variables**:
